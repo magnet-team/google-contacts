@@ -32,6 +32,7 @@
     <gd:street>Xolo</gd:street>
     <gd:city>Dome</gd:city>
     <gd:region>Krypton</gd:region>
+    <gd:country code="US">USA</gd:country>
   </gd:structuredPostalAddress>
   <gd:structuredPostalAddress rel='http://schemas.google.com/g/2005#work'>
     <gd:formattedAddress>Nokia Lumia 720
