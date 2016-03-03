@@ -25,6 +25,9 @@
   <gd:phoneNumber rel="http://schemas.google.com/g/2005#mobile" uri="tel:+91-1234-567-890">1234567890</gd:phoneNumber>
   <gd:phoneNumber rel="http://schemas.google.com/g/2005#work" uri="tel:+91-3216-549-870">3216549870</gd:phoneNumber>
   <gd:phoneNumber rel="http://schemas.google.com/g/2005#work_mobile">12321312321213</gd:phoneNumber>
+  <gd:phoneNumber rel="http://schemas.google.com/g/2005#home_fax">9999999999</gd:phoneNumber>
+  <gd:phoneNumber rel="http://schemas.google.com/g/2005#work_fax">8888888888</gd:phoneNumber>
+  <gd:phoneNumber label="Other fax">7777777777</gd:phoneNumber>
   <gd:structuredPostalAddress rel='http://schemas.google.com/g/2005#home'>
     <gd:formattedAddress>Xolo
       Dome

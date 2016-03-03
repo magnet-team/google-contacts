@@ -154,6 +154,10 @@ describe GContacts::Element do
       element.hashed_mobile_numbers.should == {"Other's mobile"=>["987-654-3210"], "mobile"=>["1234567890"], "work mobile"=>["12321312321213"]}
     end
 
+    it '#hashed_fax_numbers' do
+      element.hashed_fax_numbers.should == {"home fax"=>["9999999999"], "work fax"=>["8888888888"], "Other fax"=>["7777777777"]}
+    end
+
     it '#hashed_websites' do
       element.hashed_websites.should == { "profile"=>["example.profile.com"], "blog"=>["example.wordpress.com"],
         "Custom"=>["custom.com"], "home-page"=>["homepage.wordpress.com"], "work"=>["example.work.com"] }
