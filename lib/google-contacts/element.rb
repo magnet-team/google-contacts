@@ -3,9 +3,10 @@ require 'net/http'
 module GContacts
   class Element
     attr_accessor :addresses, :birthday, :content, :data, :category, :emails,
-      :etag, :groups, :group_id, :hashed_addresses, :hashed_email_addresses,
-      :hashed_phone_numbers, :hashed_mobile_numbers, :hashed_websites, :mobiles,
-      :name, :organization, :org_name, :org_title, :phones, :title, :websites
+      :etag, :fax_numbers, :groups, :group_id, :hashed_addresses,
+      :hashed_email_addresses, :hashed_fax_numbers, :hashed_phone_numbers,
+      :hashed_mobile_numbers, :hashed_websites, :mobiles, :name, :organization,
+      :org_name, :org_title, :phones, :title, :websites
     attr_reader :batch, :edit_uri, :id, :modifier_flag, :photo_uri, :updated
 
     ##
