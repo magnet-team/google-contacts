@@ -151,7 +151,7 @@ describe GContacts::Element do
     end
 
     it '#hashed_mobile_numbers' do
-      element.hashed_mobile_numbers.should == {"Other's mobile"=>["987-654-3210"], "mobile"=>["1234567890"], "work_mobile"=>["12321312321213"]}
+      element.hashed_mobile_numbers.should == {"Other's mobile"=>["987-654-3210"], "mobile"=>["1234567890"], "work mobile"=>["12321312321213"]}
     end
 
     it '#hashed_websites' do
