@@ -304,7 +304,6 @@ module GContacts
     end
 
     private
-     # Evil ahead
       def get_google_type(google_type)
         google_type.split("#").last.tr("_", " ")
       end
