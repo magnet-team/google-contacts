@@ -310,7 +310,7 @@ module GContacts
 
     private
       def get_google_type(google_type)
-        google_type.split("http://schemas.google.com/g/2005#").last.gsub("_", " ")
+        google_type.split("#").last.gsub("_", " ")
       end
 
       def handle_data(tag, data, indent)
