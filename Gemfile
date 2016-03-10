@@ -1,4 +1,4 @@
 source "http://rubygems.org"
 gemspec
 
-gem "rake"
+gem 'rake', '< 11.0'
