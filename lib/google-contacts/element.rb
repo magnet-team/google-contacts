@@ -91,7 +91,7 @@ module GContacts
         new_email = {}
         new_email['address'] = email['@address']
         unless email['@rel'].nil?
-          new_email['type'] = get_google_type(email['@rel'])
+          new_email['type'] = get_google_label_name(email['@rel'])
         else
           new_email['type'] = email['@label']
         end
@@ -115,7 +115,7 @@ module GContacts
           new_phone = {}
           new_phone['text'] = phone
           unless phone.attributes['rel'].nil?
-            google_category = get_google_type(phone.attributes['rel'])
+            google_category = get_google_label_name(phone.attributes['rel'])
           else
             google_category = phone.attributes['label']
           end
@@ -149,7 +149,7 @@ module GContacts
         new_address['zipcode']      = address['gd:postcode']
         new_address['country']      = address['gd:country']
         unless address['@rel'].nil?
-          new_address['type'] = get_google_type(address['@rel'])
+          new_address['type'] = get_google_label_name(address['@rel'])
         else
           new_address['type'] = address['@label']
         end
@@ -309,7 +309,7 @@ module GContacts
     end
 
     private
-      def get_google_type(google_type)
+      def get_google_label_name(google_type)
         google_type.split("#").last.gsub("_", " ")
       end
 
