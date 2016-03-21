@@ -13,7 +13,7 @@ module GContacts
       end
 
       data = data["feed"]
-      
+
       if data.nil?
         @entries = []
         return
@@ -30,9 +30,9 @@ module GContacts
       if data["link"]
         data["link"].each do |link|
           if link["@rel"] == "next"
-            @next_uri = URI(link["@href"])
+            @next_uri = parse_link(link["@href"])
           elsif link["@rel"] == "previous"
-            @previous_uri = URI(link["@href"])
+            @previous_uri = parse_link(link["@href"])
           end
         end
       end
@@ -41,20 +41,24 @@ module GContacts
       @per_page, @start_index, @total_results = data["openSearch:itemsPerPage"].to_i, data["openSearch:startIndex"].to_i, data["openSearch:totalResults"].to_i
       @category = @entries.first.category unless @entries.empty?
     end
-    
+
     def merge!(list)
       raise ArgumentError.new("Can only merge other lists") unless list.class == self.class
-      
+
       @entries += list.entries
       @next_uri = list.next_uri
       @previous_uri = list.previous_uri
-      return self     
+      return self
     end
 
     def each; @entries.each {|e| yield e} end
     def [](index); @entries[index] end
     def empty?; @entries.empty? end
     def length; @entries.length end
+
+    def parse_link(href)
+      URI(href.gsub(/(&#38;)|(&amp;)/, '&'))
+    end
 
     alias size length
   end

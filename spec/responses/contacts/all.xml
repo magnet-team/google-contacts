@@ -36,6 +36,7 @@
     <gd:email rel='http://schemas.google.com/g/2005#other' address='steve@gmail.com'/>
     <gd:phoneNumber rel='http://schemas.google.com/g/2005#mobile'>3005004000</gd:phoneNumber>
     <gd:phoneNumber rel='http://schemas.google.com/g/2005#work'>+130020003000</gd:phoneNumber>
+    <gd:phoneNumber rel='http://schemas.google.com/g/2005#home_fax'>+130020003111</gd:phoneNumber>
     <gContact:groupMembershipInfo deleted='false' href='http://www.google.com/m8/feeds/groups/john.doe%40gmail.com/base/6'/>
   </entry>
   <entry gd:etag='&quot;ZGRhYjVhMTNkMmFhNzJjMzEyY2Ux.&quot;'>

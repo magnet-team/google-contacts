@@ -95,7 +95,7 @@ describe GContacts::Element do
       elements = GContacts::List.new(parser.parse(File.read("spec/responses/contacts/all.xml")))
 
       expected = [
-        {"id"=>"http://www.google.com/m8/feeds/contacts/john.doe%40gmail.com/full/fd8fb1a55f2916e", "atom:category"=>{"@scheme"=>"http://schemas.google.com/g/2005#kind", "@term"=>"http://schemas.google.com/g/2008#contact"}, "atom:content"=>{"@type"=>"text"}, "atom:title"=>"Steve Stephson", "gd:name"=>{"gd:fullName"=>"Steve Stephson", "gd:givenName"=>"Steve", "gd:familyName"=>"Stephson"}, "gd:email"=>[{"@rel"=>"http://schemas.google.com/g/2005#other", "@address"=>"steve.stephson@gmail.com", "@primary"=>"true"}, {"@rel"=>"http://schemas.google.com/g/2005#other", "@address"=>"steve@gmail.com"}], "gd:phoneNumber"=>["3005004000", "+130020003000"],  "gContact:groupMembershipInfo"=>{"@deleted"=>"false", "@href"=>"http://www.google.com/m8/feeds/groups/john.doe%40gmail.com/base/6"}, "@xmlns:atom"=>"http://www.w3.org/2005/Atom", "@xmlns:gd"=>"http://schemas.google.com/g/2005", "@xmlns:gContact"=>"http://schemas.google.com/contact/2008", "@gd:etag"=>"\"OWUxNWM4MTEzZjEyZTVjZTQ1Mjgy.\""},
+        {"id"=>"http://www.google.com/m8/feeds/contacts/john.doe%40gmail.com/full/fd8fb1a55f2916e", "atom:category"=>{"@scheme"=>"http://schemas.google.com/g/2005#kind", "@term"=>"http://schemas.google.com/g/2008#contact"}, "atom:content"=>{"@type"=>"text"}, "atom:title"=>"Steve Stephson", "gd:name"=>{"gd:fullName"=>"Steve Stephson", "gd:givenName"=>"Steve", "gd:familyName"=>"Stephson"}, "gd:email"=>[{"@rel"=>"http://schemas.google.com/g/2005#other", "@address"=>"steve.stephson@gmail.com", "@primary"=>"true"}, {"@rel"=>"http://schemas.google.com/g/2005#other", "@address"=>"steve@gmail.com"}], "gd:phoneNumber"=>["3005004000", "+130020003000", "+130020003111"], "gContact:groupMembershipInfo"=>{"@deleted"=>"false", "@href"=>"http://www.google.com/m8/feeds/groups/john.doe%40gmail.com/base/6"}, "@xmlns:atom"=>"http://www.w3.org/2005/Atom", "@xmlns:gd"=>"http://schemas.google.com/g/2005", "@xmlns:gContact"=>"http://schemas.google.com/contact/2008", "@gd:etag"=>"\"OWUxNWM4MTEzZjEyZTVjZTQ1Mjgy.\""},
 
         {"id"=>"http://www.google.com/m8/feeds/contacts/john.doe%40gmail.com/full/894bc75ebb5187d", "atom:category"=>{"@scheme"=>"http://schemas.google.com/g/2005#kind", "@term"=>"http://schemas.google.com/g/2008#contact"}, "atom:content"=>{"@type"=>"text"}, "atom:title"=>"Jill Doe", "gd:name"=>{"gd:fullName"=>"Jill Doe", "gd:givenName"=>"Jill", "gd:familyName"=>"Doe"}, "@xmlns:atom"=>"http://www.w3.org/2005/Atom", "@xmlns:gd"=>"http://schemas.google.com/g/2005", "@xmlns:gContact"=>"http://schemas.google.com/contact/2008", "@gd:etag"=>"\"ZGRhYjVhMTNkMmFhNzJjMzEyY2Ux.\""},
 
@@ -147,11 +147,15 @@ describe GContacts::Element do
     end
 
     it '#hashed_phone_numbers' do
-      element.hashed_phone_numbers.should == {"work"=>["3216549870"]}
+      element.hashed_phone_numbers.should == {"Other phone"=>["789-654-3210"], "other_phone"=>["456-654-3210"], "work"=>["3216549870"], "grandcentral"=>["213-654-4645"]}
     end
 
     it '#hashed_mobile_numbers' do
-      element.hashed_mobile_numbers.should == {"Other's mobile"=>["987-654-3210"], "mobile"=>["1234567890"], "work_mobile"=>["12321312321213"]}
+      element.hashed_mobile_numbers.should == {"Other's mobile"=>["987-654-3210"], "other_mobile"=>["987-456-0213"], "mobile"=>["1234567890"], "work mobile"=>["12321312321213"]}
+    end
+
+    it '#hashed_fax_numbers' do
+      element.hashed_fax_numbers.should == {"home fax"=>["9999999999"], "work fax"=>["8888888888"], "Other fax"=>["7777777777"], "other_fax"=>["3333333333"]}
     end
 
     it '#hashed_websites' do

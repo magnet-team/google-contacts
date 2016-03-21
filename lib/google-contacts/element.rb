@@ -3,9 +3,10 @@ require 'net/http'
 module GContacts
   class Element
     attr_accessor :addresses, :birthday, :content, :data, :category, :emails,
-      :etag, :groups, :group_id, :hashed_addresses, :hashed_email_addresses,
-      :hashed_phone_numbers, :hashed_mobile_numbers, :hashed_websites, :mobiles,
-      :name, :organization, :org_name, :org_title, :phones, :title, :websites
+      :etag, :fax_numbers, :groups, :group_id, :hashed_addresses,
+      :hashed_email_addresses, :hashed_fax_numbers, :hashed_phone_numbers,
+      :hashed_mobile_numbers, :hashed_websites, :mobiles, :name, :organization,
+      :org_name, :org_title, :phones, :title, :websites
     attr_reader :batch, :edit_uri, :id, :modifier_flag, :photo_uri, :updated
 
     ##
@@ -90,7 +91,7 @@ module GContacts
         new_email = {}
         new_email['address'] = email['@address']
         unless email['@rel'].nil?
-          new_email['type'] = email['@rel']
+          new_email['type'] = get_google_label_name(email['@rel'])
         else
           new_email['type'] = email['@label']
         end
@@ -100,6 +101,7 @@ module GContacts
 
       @phones = []
       @mobiles = []
+      @fax_numbers = []
       if entry["gd:phoneNumber"].is_a?(Array)
         nodes = entry["gd:phoneNumber"]
       elsif !entry["gd:phoneNumber"].nil?
@@ -112,10 +114,17 @@ module GContacts
         if phone.respond_to? :attributes
           new_phone = {}
           new_phone['text'] = phone
-          google_category   = phone.attributes['rel'] || phone.attributes['label']
+          unless phone.attributes['rel'].nil?
+            google_category = get_google_label_name(phone.attributes['rel'])
+          else
+            google_category = phone.attributes['label']
+          end
+
           new_phone['@rel'] = google_category
           if google_category.downcase.include?('mobile')
             @mobiles << new_phone
+          elsif google_category.downcase.include?('fax')
+            @fax_numbers << new_phone
           else
             @phones << new_phone
           end
@@ -140,7 +149,7 @@ module GContacts
         new_address['zipcode']      = address['gd:postcode']
         new_address['country']      = address['gd:country']
         unless address['@rel'].nil?
-          new_address['type'] = address['@rel']
+          new_address['type'] = get_google_label_name(address['@rel'])
         else
           new_address['type'] = address['@label']
         end
@@ -150,7 +159,7 @@ module GContacts
 
       @hashed_email_addresses = {}
       @emails.each do |email|
-        type = email['type'].split("#").last
+        type = email['type']
         text = email['address']
         @hashed_email_addresses.merge!(type => []) unless(@hashed_email_addresses[type])
         @hashed_email_addresses[type] << text
@@ -158,28 +167,39 @@ module GContacts
 
       @hashed_addresses = {}
       @addresses.each do |address|
-        type = address['type'].split("#").last
+        type = address['type']
         @hashed_addresses.merge!(type => []) unless(@hashed_addresses[type])
-        @hashed_addresses[type] << { address: address['address'],
-          address_line: address['address_line'], geo_city: address['geo_city'],
-          geo_state: address['geo_state'], zipcode: address['zipcode'],
-          country: address['country'] }
+        @hashed_addresses[type] << {
+          address:      address['address'],
+          address_line: address['address_line'],
+          geo_city:     address['geo_city'],
+          geo_state:    address['geo_state'],
+          zipcode:      address['zipcode'],
+          country:      address['country'] }
       end if @addresses.any?
 
       @hashed_phone_numbers = {}
       @phones.each do |phone|
-        type = phone['@rel'].split("#").last
+        type = phone['@rel']
         text = phone['text']
         @hashed_phone_numbers.merge!(type => []) unless(@hashed_phone_numbers[type])
         @hashed_phone_numbers[type] << text
-      end if @phones.any?
+      end
 
       @hashed_mobile_numbers = {}
       @mobiles.each do |mobile|
-        type = mobile['@rel'].split("#").last
+        type = mobile['@rel']
         text = mobile['text']
         @hashed_mobile_numbers.merge!(type => []) unless(@hashed_mobile_numbers[type])
         @hashed_mobile_numbers[type] << text
+      end
+
+      @hashed_fax_numbers = {}
+      @fax_numbers.each do |fax|
+        type = fax['@rel']
+        text = fax['text']
+        @hashed_fax_numbers.merge!(type => []) unless(@hashed_fax_numbers[type])
+        @hashed_fax_numbers[type] << text
       end
 
       @websites = []
@@ -289,7 +309,10 @@ module GContacts
     end
 
     private
-     # Evil ahead
+      def get_google_label_name(google_type)
+        google_type.split("#").last.gsub("_", " ")
+      end
+
       def handle_data(tag, data, indent)
         if data.is_a?(Array)
           xml = ""
