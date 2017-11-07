@@ -374,7 +374,7 @@ module GContacts
 
           data.each do |key, value|
             next unless key =~ /^@(.+)/
-            xml << " #{$1}=\"#{value.encode(:xml => :attr)}\""
+            xml << " #{$1}=#{value.is_a?(String) ? value.encode(xml: :attr) : value}"
             misc_keys -= 1
           end
 
