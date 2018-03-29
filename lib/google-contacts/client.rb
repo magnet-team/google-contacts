@@ -365,7 +365,7 @@ module GContacts
       elsif response.code == "401"
         raise Unauthorized.new(response.message)
       elsif response.code != "200" and response.code != "201"
-        raise Net::HTTPError.new("#{response.message} (#{response.code})", response)
+        raise Net::HTTPError.new("#{response.body} - (Message #{response.message}) - (HTTP #{response.code})", response)
       end
 
       response.body
