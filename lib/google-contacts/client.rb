@@ -315,7 +315,7 @@ module GContacts
       # Available to use for quota purposes for server-side applications. Can be any
       # arbitrary string assigned to a user, but should not exceed 40 characters.
       unless @options[:quota_user].nil?
-        query_string = query_string.nil? ? "quota_user=#{@options[:quota_user]}" : "#{query_string}&quota_user=#{@options[:quota_user]}"
+        query_string = query_string.nil? ? "quotaUser=#{@options[:quota_user]}" : "#{query_string}&quotaUser=#{@options[:quota_user]}"
       end
 
       if token.is_a?(String)
