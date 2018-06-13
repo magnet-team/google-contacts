@@ -3,7 +3,7 @@ require "spec_helper"
 describe GContacts::Element do
   include Support::ResponseMock
 
-  let(:parser) { Nori.new }
+  let(:parser) { Nori.new(advanced_typecasting: false) }
 
   it "changes modifier flags" do
     element = GContacts::Element.new
