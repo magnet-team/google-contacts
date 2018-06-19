@@ -312,6 +312,12 @@ module GContacts
 
       headers["GData-Version"] = "3.0"
 
+      # Available to use for quota purposes for server-side applications. Can be any
+      # arbitrary string assigned to a user, but should not exceed 40 characters.
+      unless @options[:quota_user].nil?
+        query_string = query_string.nil? ? "quotaUser=#{@options[:quota_user]}" : "#{query_string}&quotaUser=#{@options[:quota_user]}"
+      end
+
       if token.is_a?(String)
         request_uri = query_string ? "#{uri.request_uri}?#{query_string}" : uri.request_uri
         headers["Authorization"] = "Bearer #{@options[:access_token]}"
