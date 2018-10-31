@@ -11,12 +11,8 @@
     <gd:givenName>Casey</gd:givenName>
   </gd:name>
   <gd:organization rel='http://schemas.google.com/g/2005#other'>
-    <gd:orgName>
-      Organisation
-    </gd:orgName>
-    <gd:orgTitle>
-      Developer
-    </gd:orgTitle>
+    <gd:orgName>Organisation</gd:orgName>
+    <gd:orgTitle>2016-12-16</gd:orgTitle>
   </gd:organization>
   <gd:email rel='http://schemas.google.com/g/2005#work' address='casey@gmail.com' primary='true'/>
   <gd:email rel='http://schemas.google.com/g/2005#home' address='casey.1900@gmail.com'/>

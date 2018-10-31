@@ -379,7 +379,7 @@ module GContacts
 
     # Wrapper to send arguments to Nori's new instance-based parser
     def nori_parse(args)
-      @nori_parser ||= Nori.new
+      @nori_parser ||= Nori.new(advanced_typecasting: false)
       @nori_parser.parse(args)
     end
 
