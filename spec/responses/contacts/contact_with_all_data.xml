@@ -45,6 +45,7 @@
     <gd:street>Nokia Limia 720</gd:street>
     <gd:city>Finland</gd:city>
     <gd:region>Earth</gd:region>
+    <gd:country code="US"></gd:country>
   </gd:structuredPostalAddress>
   <gContact:birthday when='1989-09-10'/> <!-- Format is YYYY-MM-DD -->
   <gContact:event label='Birthday'>

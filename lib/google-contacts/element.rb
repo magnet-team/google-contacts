@@ -147,7 +147,8 @@ module GContacts
         new_address['geo_city']     = address['gd:city']
         new_address['geo_state']    = address['gd:region']
         new_address['zipcode']      = address['gd:postcode']
-        new_address['country']      = address['gd:country']
+        country = address['gd:country']
+        new_address['country']      = country.is_a?(Hash) ? nil : country
         unless address['@rel'].nil?
           new_address['type'] = get_google_label_name(address['@rel'])
         else
