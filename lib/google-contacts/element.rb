@@ -142,11 +142,14 @@ module GContacts
 
       nodes.each do |address|
         new_address = {}
-        new_address['address']      = address['gd:formattedAddress']
-        new_address['address_line'] = address['gd:street']
-        new_address['geo_city']     = address['gd:city']
-        new_address['geo_state']    = address['gd:region']
-        new_address['zipcode']      = address['gd:postcode']
+        new_address['address']        = address['gd:formattedAddress']
+        new_address['address_line']   = address['gd:street']
+        new_address['geo_city']       = address['gd:city']
+        new_address['geo_state']      = address['gd:region']
+        new_address['zipcode']        = address['gd:postcode']
+        new_address['address_line_2'] = address['neighborhood']
+        new_address['pobox']          = address['pobox']
+
         country = address['gd:country']
         new_address['country']      = country.is_a?(String) ? country : nil
         unless address['@rel'].nil?
@@ -171,12 +174,14 @@ module GContacts
         type = address['type']
         @hashed_addresses.merge!(type => []) unless(@hashed_addresses[type])
         @hashed_addresses[type] << {
-          address:      address['address'],
-          address_line: address['address_line'],
-          geo_city:     address['geo_city'],
-          geo_state:    address['geo_state'],
-          zipcode:      address['zipcode'],
-          country:      address['country'] }
+          address:        address['address'],
+          address_line:   address['address_line'],
+          geo_city:       address['geo_city'],
+          geo_state:      address['geo_state'],
+          zipcode:        address['zipcode'],
+          country:        address['country'],
+          address_line_2: address['address_line_2'],
+          pobox:          address['pobox'] }
       end if @addresses.any?
 
       @hashed_phone_numbers = {}
