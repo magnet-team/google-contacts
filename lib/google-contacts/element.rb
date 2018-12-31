@@ -180,7 +180,7 @@ module GContacts
           geo_state:      address['geo_state'],
           zipcode:        address['zipcode'],
           country:        address['country'],
-          address_line_2: address['address_line_2'],
+          address_line_2: address['neighborhood'],
           pobox:          address['pobox'] }
       end if @addresses.any?
 
