@@ -106,7 +106,7 @@ describe GContacts::Client do
       contact.emails.should == [{"address"=>"jane.doe@gmail.com", "type"=>"home"}]
       contact.phones.should == []
       contact.mobiles.should == [{"@rel"=>"mobile", "text"=>"16004003000"}]
-      contact.addresses.should ==  [{"address"=>"5 Market St\n        San Francisco\n        CA", "address_line"=>"5 Market St", "geo_city"=>"San Francisco", "geo_state"=>"CA", "zipcode"=>nil, "address_line_2"=>nil, "pobox"=>nil, "country"=>nil, "type"=>"home"}]
+      contact.addresses.should ==  [{"address"=>"5 Market St\n        San Francisco\n        CA", "address_line"=>"5 Market St", "geo_city"=>"San Francisco", "geo_state"=>"CA", "zipcode"=>nil, "address_line_2"=>nil, "address_line_3"=>nil, "country"=>nil, "type"=>"home"}]
     end
 
     it 'loads all from a group' do
