@@ -4,14 +4,16 @@ module GContacts
   class Element
     attr_accessor :addresses, :birthday, :content, :data, :category, :emails,
                   :etag, :fax_numbers, :groups, :group_id, :hashed_addresses,
-                  :hashed_email_addresses, :hashed_fax_numbers, :hashed_phone_numbers,
-                  :hashed_mobile_numbers, :hashed_websites, :mobiles, :name, :organization,
+                  :hashed_email_addresses, :hashed_fax_numbers,
+                  :hashed_phone_numbers, :hashed_mobile_numbers,
+                  :hashed_websites, :mobiles, :name, :organization,
                   :org_name, :org_title, :phones, :title, :websites
     attr_reader :batch, :edit_uri, :id, :modifier_flag, :photo_uri, :updated
 
     ##
     # Creates a new element by parsing the returned entry from Google
-    # @param [Hash, Optional] entry Hash representation of the XML returned from Google
+    # @param [Hash, Optional] entry Hash representation of the XML
+    # returned from Google
     #
     def initialize(entry = nil)
       @data = {}
@@ -377,7 +379,8 @@ module GContacts
       xml = ' ' * indent
       xml << '<' << tag
 
-      # Need to check for any additional attributes to attach since they can be mixed in
+      # Need to check for any additional attributes to attach
+      # since they can be mixed in
       misc_keys = 0
       if data.is_a?(Hash)
         misc_keys = data.length
@@ -403,7 +406,7 @@ module GContacts
         xml << "</#{tag}>\n"
         return xml
       # No other data to show, was just attributes
-      elsif misc_keys == 0
+      elsif misc_keys.zero?
         xml << "/>\n"
         return xml
       end
