@@ -30,7 +30,8 @@ module GContacts
       @photo_uri = nil
       if entry['category']
         @category = entry['category']['@term'].split('#', 2).last
-        @category_tag = entry['category']['@label'] if entry['category']['@label']
+        entry['category']['@label'] &&
+          @category_tag = entry['category']['@label']
       end
 
       # Parse out all the relevant data
@@ -48,7 +49,12 @@ module GContacts
             @batch['status'] = 'interrupted'
             @batch['code'] = '400'
             @batch['reason'] = unparsed['@reason']
-            @batch['status'] = { 'parsed' => unparsed['@parsed'].to_i, 'success' => unparsed['@success'].to_i, 'error' => unparsed['@error'].to_i, 'unprocessed' => unparsed['@unprocessed'].to_i }
+            @batch['status'] = {
+              'parsed' => unparsed['@parsed'].to_i,
+              'success' => unparsed['@success'].to_i,
+              'error' => unparsed['@error'].to_i,
+              'unprocessed' => unparsed['@unprocessed'].to_i
+            }
           elsif Regexp.last_match(1) == 'id'
             @batch['status'] = unparsed
           elsif Regexp.last_match(1) == 'status'
@@ -70,7 +76,9 @@ module GContacts
       if (groups = [entry['gContact:groupMembershipInfo']])
         groups.flatten.compact.each do |group|
           @modifier_flag = :delete if group['@deleted'] == 'true'
-          @groups << { group_id: group['@href'].split('/').pop, group_href: group['@href'] }
+          @groups << {
+            group_id: group['@href'].split('/').pop, group_href: group['@href']
+          }
         end
       end
 
@@ -231,7 +239,11 @@ module GContacts
       nodes.each do |website|
         new_website = {}
         new_website['gContact:website'] = website['@href']
-        new_website['type'] = website['@rel'].nil? ? website['@label'] : website['@rel']
+        new_website['type'] = if website['@rel'].nil?
+                                website['@label']
+                              else
+                                website['@rel']
+                              end
         @websites << new_website
       end
 
@@ -272,19 +284,22 @@ module GContacts
     end
 
     ##
-    # Flags the element for creation, must be passed through {GContacts::Client#batch} for the change to take affect.
+    # Flags the element for creation, must be passed through
+    # {GContacts::Client#batch} for the change to take affect.
     def create
       @modifier_flag = :create unless @id
     end
 
     ##
-    # Flags the element for deletion, must be passed through {GContacts::Client#batch} for the change to take affect.
+    # Flags the element for deletion, must be passed through
+    # {GContacts::Client#batch} for the change to take affect.
     def delete
       @modifier_flag = (:delete if @id)
     end
 
     ##
-    # Flags the element to be updated, must be passed through {GContacts::Client#batch} for the change to take affect.
+    # Flags the element to be updated, must be passed through
+    # {GContacts::Client#batch} for the change to take affect.
     def update
       @modifier_flag = :update if @id
     end
@@ -343,9 +358,12 @@ module GContacts
     def organization_details
       @organization.blank? && return
 
-      org_details = @organization.is_a?(Array) ?
-        (@organization.select { |k| k['@primary'] }.first || @organization.first) :
-        @organization
+      org_details = if @organization.is_a?(Array)
+                      @organization.select { |k| k['@primary'] }.first ||
+                        @organization.first
+                    else
+                      @organization
+                    end
       @org_name  = org_details['gd:orgName']
       @org_title = org_details['gd:orgTitle']
     end
