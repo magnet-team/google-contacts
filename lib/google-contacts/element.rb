@@ -161,8 +161,8 @@ module GContacts
         new_address['geo_city']       = address['gd:city']
         new_address['geo_state']      = address['gd:region']
         new_address['zipcode']        = address['gd:postcode']
-        new_address['address_line_2'] = address['neighborhood']
-        new_address['address_line_3'] = address['pobox']
+        new_address['address_line_2'] = address['gd:neighborhood']
+        new_address['address_line_3'] = address['gd:pobox']
         country = address['gd:country']
         new_address['country'] = country.is_a?(String) ? country : nil
         new_address['type'] = if address['@rel'].nil?
