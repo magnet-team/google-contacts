@@ -100,6 +100,8 @@
       <gd:street>5 Market St</gd:street>
       <gd:city>San Francisco</gd:city>
       <gd:region>CA</gd:region>
+      <gd:neighborhood>near neighborhood</gd:neighborhood>
+      <gd:pobox>123</gd:pobox>
     </gd:structuredPostalAddress>
     <gContact:groupMembershipInfo deleted='false' href='http://www.google.com/m8/feeds/groups/john.doe%40gmail.com/base/6'/>
   </entry>
