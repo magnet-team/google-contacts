@@ -143,7 +143,7 @@ describe GContacts::Element do
 
     it '#hashed_addresses' do
       element.hashed_addresses.should == {"home" => [{:address=>"Xolo\n      Dome\n      Krypton", :address_line =>"Xolo", :geo_city=>"Dome", :geo_state=>'Krypton', :zipcode => nil, :country=>"USA"}],
-        "work" => [{ :address=>"Nokia Lumia 720\n      Finland\n      Earth", :address_line=>"Nokia Limia 720", :geo_city=>"Finland", :geo_state=>'Earth', :zipcode => nil, :country=>nil}]}
+        "work" => [{ :address=>"Nokia Lumia 720\n      Finland\n      Earth", :address_line=>"Nokia Limia 720", :geo_city=>"Finland", :geo_state=>'Earth', :zipcode => nil, :country=>'US'}]}
     end
 
     it '#hashed_phone_numbers' do
