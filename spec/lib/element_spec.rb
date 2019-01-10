@@ -142,8 +142,33 @@ describe GContacts::Element do
     end
 
     it '#hashed_addresses' do
-      element.hashed_addresses.should == {"home" => [{:address=>"Xolo\n      Dome\n      Krypton", :address_line =>"Xolo", :geo_city=>"Dome", :geo_state=>'Krypton', :zipcode => nil, :country=>"USA"}],
-        "work" => [{ :address=>"Nokia Lumia 720\n      Finland\n      Earth", :address_line=>"Nokia Limia 720", :geo_city=>"Finland", :geo_state=>'Earth', :zipcode => nil, :country=>'US'}]}
+      element.hashed_addresses.should == {
+        "home" =>
+          [{
+            :address=>"Xolo\n      Dome\n      Krypton",
+            :address_line =>"Xolo",
+            :geo_city=>"Dome",
+            :geo_state=>'Krypton',
+            :zipcode => nil,
+            :country=>"US"}],
+        "work" =>
+          [{
+            :address=>"Nokia Lumia 720\n      Finland\n      Earth",
+            :address_line=>"Nokia Limia 720",
+            :geo_city=>"Finland",
+            :geo_state=>"Earth",
+            :zipcode=>nil,
+            :country=>"US"
+          },
+          {
+            :address=>"5 Market St\n      San Francisco\n      CA",
+            :address_line=>"5 Market St",
+            :geo_city=>"San Francisco",
+            :geo_state=>"CA",
+            :zipcode=>nil,
+            :country=>"US"
+          }]
+        }
     end
 
     it '#hashed_phone_numbers' do
