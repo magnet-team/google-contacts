@@ -151,7 +151,7 @@ module GContacts
         new_address['country']      =
           case country.class.name
           when 'String', 'Nori::StringWithAttributes'
-            country
+            country.attributes['code'] || country
           when 'Hash'
             country['@code']
           end
