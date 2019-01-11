@@ -378,8 +378,11 @@ describe GContacts::Client do
         File.read('spec/responses/contacts/get.xml')
       ) do |http_mock, res_mock|
         expect(http_mock).to receive(:request_get)
-          .with('/m8/feeds/contacts/default/full/908f380f4c2f81?a=1',
-                hash_including('Authorization' => 'Bearer 12341234')).and_return(res_mock)
+          .with(
+            '/m8/feeds/contacts/default/full/908f380f4c2f81?a=1',
+            hash_including('Authorization' => 'Bearer 12341234')
+          )
+          .and_return(res_mock)
       end
 
       client = GContacts::Client.new(access_token: '12341234')
@@ -677,7 +680,8 @@ describe GContacts::Client do
           'unprocessed' => 0
         },
         'code' => '400',
-        'reason' => "[Line 5, Column 35, element atom:entry] Invalid type for batch:operation: 'create'"
+        'reason' => "[Line 5, Column 35, element atom:entry]"\
+                    " Invalid type for batch:operation: 'create'"
       )
     end
   end
@@ -764,7 +768,9 @@ describe GContacts::Client do
     end
 
     it 'gets a single one' do
-      mock_response(File.read('spec/responses/groups/get.xml')) do |http_mock, res_mock|
+      mock_response(
+        File.read('spec/responses/groups/get.xml')
+      ) do |http_mock, res_mock|
         expect(http_mock).to receive(:request_get)
           .with(
             '/m8/feeds/groups/default/full/908f380f4c2f81?a=1',
@@ -824,7 +830,9 @@ describe GContacts::Client do
       expect(element.title).to eq('Bar Bar')
       expect(element.content).to eq('Bar Bar')
 
-      mock_response(File.read('spec/responses/groups/update.xml')) do |http_mock, res_mock|
+      mock_response(
+        File.read('spec/responses/groups/update.xml')
+      ) do |http_mock, res_mock|
         expect(http_mock).to receive(:request_put)
           .with(
             '/m8/feeds/groups/default/full/3f93e3738e811d63',
