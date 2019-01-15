@@ -162,7 +162,7 @@ module GContacts
         new_address['geo_state']      = address['gd:region']
         new_address['zipcode']        = address['gd:postcode']
         new_address['address_line_2'] = address['gd:neighborhood']
-        new_address['address_line_3'] = address['gd:pobox']
+        new_address['pobox']          = address['gd:pobox']
         country = address['gd:country']
         new_address['country'] = country.is_a?(String) ? country : nil
         new_address['type'] = if address['@rel'].nil?
@@ -197,7 +197,7 @@ module GContacts
             zipcode:        address['zipcode'],
             country:        address['country'],
             address_line_2: address['address_line_2'],
-            address_line_3: address['address_line_3']
+            pobox:          address['pobox']
           }
         end
       end

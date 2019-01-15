@@ -134,7 +134,7 @@ describe GContacts::Client do
       contact.emails.should == [{ 'address' => 'jane.doe@gmail.com', 'type' => 'home' }]
       contact.phones.should == []
       contact.mobiles.should == [{ '@rel' => 'mobile', 'text' => '16004003000' }]
-      contact.addresses.should == [{"address"=>"5 Market St\n        San Francisco\n        CA", "address_line"=>"5 Market St", "geo_city"=>"San Francisco", "geo_state"=>"CA", "zipcode"=>nil, "address_line_2"=>"near neighborhood", "address_line_3"=>"123", "country"=>nil, "type"=>"home"}]
+      contact.addresses.should == [{"address"=>"5 Market St\n        San Francisco\n        CA", "address_line"=>"5 Market St", "geo_city"=>"San Francisco", "geo_state"=>"CA", "zipcode"=>nil, "address_line_2"=>"near neighborhood", "pobox"=>"123", "country"=>nil, "type"=>"home"}]
     end
 
     it 'loads all from a group' do
