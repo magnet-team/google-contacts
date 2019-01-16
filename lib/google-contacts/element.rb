@@ -148,7 +148,13 @@ module GContacts
         new_address['geo_state']    = address['gd:region']
         new_address['zipcode']      = address['gd:postcode']
         country = address['gd:country']
-        new_address['country']      = country.is_a?(String) ? country : nil
+        new_address['country']      =
+          case country.class.name
+          when 'String', 'Nori::StringWithAttributes'
+            country.attributes['code'] || country
+          when 'Hash'
+            country['@code']
+          end
         unless address['@rel'].nil?
           new_address['type'] = get_google_label_name(address['@rel'])
         else
