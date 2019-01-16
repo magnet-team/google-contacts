@@ -31,8 +31,8 @@
   <gd:phoneNumber label="grandcentral" uri="tel:+91-2136-544-645">213-654-4645</gd:phoneNumber>
   <gd:structuredPostalAddress rel='http://schemas.google.com/g/2005#home'>
     <gd:formattedAddress>Xolo
-      Dome
-      Krypton</gd:formattedAddress>
+Dome
+Krypton</gd:formattedAddress>
     <gd:street>Xolo</gd:street>
     <gd:city>Dome</gd:city>
     <gd:region>Krypton</gd:region>
@@ -40,12 +40,21 @@
   </gd:structuredPostalAddress>
   <gd:structuredPostalAddress rel='http://schemas.google.com/g/2005#work'>
     <gd:formattedAddress>Nokia Lumia 720
-      Finland
-      Earth</gd:formattedAddress>
+Finland
+Earth</gd:formattedAddress>
     <gd:street>Nokia Limia 720</gd:street>
     <gd:city>Finland</gd:city>
     <gd:region>Earth</gd:region>
     <gd:country code="US"></gd:country>
+  </gd:structuredPostalAddress>
+  <gd:structuredPostalAddress rel='http://schemas.google.com/g/2005#work'>
+    <gd:formattedAddress>5 Market St
+San Francisco
+CA</gd:formattedAddress>
+    <gd:street>5 Market St</gd:street>
+    <gd:city>San Francisco</gd:city>
+    <gd:region>CA</gd:region>
+    <gd:country>US</gd:country>
   </gd:structuredPostalAddress>
   <gContact:birthday when='1989-09-10'/> <!-- Format is YYYY-MM-DD -->
   <gContact:event label='Birthday'>

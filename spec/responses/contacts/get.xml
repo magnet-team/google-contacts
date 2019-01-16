@@ -18,16 +18,16 @@
   <gd:phoneNumber rel='http://schemas.google.com/g/2005#work'>+130020003000</gd:phoneNumber>
   <gd:structuredPostalAddress rel='http://schemas.google.com/g/2005#home'>
     <gd:formattedAddress>Xolo
-      Dome
-      Krypton</gd:formattedAddress>
+Dome
+Krypton</gd:formattedAddress>
     <gd:street>Xolo</gd:street>
     <gd:city>Dome</gd:city>
     <gd:region>Krypton</gd:region>
   </gd:structuredPostalAddress>
   <gd:structuredPostalAddress rel='http://schemas.google.com/g/2005#work'>
     <gd:formattedAddress>Nokia Lumia 720
-      Finland
-      Earth</gd:formattedAddress>
+Finland
+Earth</gd:formattedAddress>
     <gd:street>Nokia Limia 720</gd:street>
     <gd:city>Finland</gd:city>
     <gd:region>Earth</gd:region>

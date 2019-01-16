@@ -164,12 +164,18 @@ module GContacts
         new_address['address_line_2'] = address['gd:neighborhood']
         new_address['pobox']          = address['gd:pobox']
         country = address['gd:country']
-        new_address['country'] = country.is_a?(String) ? country : nil
-        new_address['type'] = if address['@rel'].nil?
-                                address['@label']
-                              else
-                                get_google_label_name(address['@rel'])
-                              end
+        new_address['country']      =
+          case country.class.name
+          when 'String', 'Nori::StringWithAttributes'
+            country.attributes['code'] || country
+          when 'Hash'
+            country['@code']
+          end
+        unless address['@rel'].nil?
+          new_address['type'] = get_google_label_name(address['@rel'])
+        else
+          new_address['type'] = address['@label']
+        end
 
         @addresses << new_address
       end
