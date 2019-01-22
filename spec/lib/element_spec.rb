@@ -392,6 +392,8 @@ describe GContacts::Element do
             'gd:street' => '5 Market St',
             'gd:city' => 'San Francisco',
             'gd:region' => 'CA',
+            'gd:neighborhood' => 'near neighborhood',
+            'gd:pobox' => '123',
             '@rel' => 'http://schemas.google.com/g/2005#home'
           },
           'gContact:groupMembershipInfo' =>
@@ -500,7 +502,9 @@ describe GContacts::Element do
             geo_city: 'Dome',
             geo_state: 'Krypton',
             zipcode: nil,
-            country: 'US'
+            country: 'US',
+            address_line_2: nil,
+            pobox: nil
           }],
         'work' =>
           [{
@@ -509,16 +513,20 @@ describe GContacts::Element do
             geo_city: 'Finland',
             geo_state: 'Earth',
             zipcode: nil,
-            country: 'US'
+            country: 'US',
+            address_line_2: nil,
+            pobox: nil
           },
-           {
-             address: "5 Market St\nSan Francisco\nCA",
-             address_line: '5 Market St',
-             geo_city: 'San Francisco',
-             geo_state: 'CA',
-             zipcode: nil,
-             country: 'US'
-           }]
+          {
+            address: "5 Market St\nSan Francisco\nCA",
+            address_line: '5 Market St',
+            geo_city: 'San Francisco',
+            geo_state: 'CA',
+            zipcode: nil,
+            country: 'US',
+            address_line_2: nil,
+            pobox: nil
+          }]
       )
     end
 

@@ -265,7 +265,9 @@ describe GContacts::Client do
           'gd:street' => '5 Market St',
           'gd:city' => 'San Francisco',
           'gd:region' => 'CA',
-          '@rel' => 'http://schemas.google.com/g/2005#home'
+          'gd:neighborhood' => 'near neighborhood',
+          'gd:pobox' => '123',
+          "@rel" => "http://schemas.google.com/g/2005#home"
         }],
         'gContact:groupMembershipInfo' =>
         [{
@@ -291,6 +293,8 @@ describe GContacts::Client do
           'geo_city' => 'San Francisco',
           'geo_state' => 'CA',
           'zipcode' => nil,
+          'address_line_2' => 'near neighborhood',
+          'pobox' => '123',
           'country' => nil,
           'type' => 'home'
         }]
